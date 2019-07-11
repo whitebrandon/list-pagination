@@ -16,8 +16,9 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
-
-
+const listItem = document.getElementsByClassName("student-item");
+const itemsPerPage = 10;
+const pageDiv = document.querySelector(".page");
 
 
 /*** 
@@ -35,14 +36,57 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+const showPage = (list, page) => {
+   const startIndex = (page * itemsPerPage) - itemsPerPage;
+   const endIndex = page * itemsPerPage;
+   for (let i = 0; i < list.length; i++) {
+      if (i >= startIndex && i < endIndex) {
+         list[i].style.display = "";
+      } else {
+         list[i].style.display = "none";
+      }
+   } 
+}
 
-
+showPage(listItem, 1);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
+const appendPageLinks = (list) => {
+   const div = document.createElement('div');
+   div.className = 'pagination';
+   const ul = document.createElement('ul');
+   const pagesNeeded = Math.ceil(list.length/itemsPerPage); // Determines number pagination links needed
+   let i = 1;
+   while (i <= pagesNeeded) {
+      const a = document.createElement('a');
+      a.textContent = i;
+      const li = document.createElement('li');
+      a.href = '#';
+      li.appendChild(a);
+      ul.appendChild(li);
+      div.addEventListener('click', (e) => {
+         const activeLinks = document.querySelectorAll('.active');
+         for (let i = 0; i < activeLinks.length; i++) {
+            activeLinks[i].classList.remove('active');
+         }
+         e.target.className = 'active';
+         showPage(listItem, e.target.textContent);
+      });
+// This is the end of the Event Listener Call Back Function        
+      if (i === 1)   {
+         a.className = 'active';
+      }
+      i++;
+   }
+   div.appendChild(ul);
+   pageDiv.appendChild(div);
+}
+
+appendPageLinks(listItem);
 
 
 
