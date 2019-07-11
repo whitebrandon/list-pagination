@@ -4,6 +4,7 @@ FSJS project 2 - List Filter and Pagination
 ******************************************/
    
 
+
 // GLOBAL VARIABLES
 const listItem = document.getElementsByClassName("student-item"); // Grabs list of students from HTML
 const itemsPerPage = 10;
