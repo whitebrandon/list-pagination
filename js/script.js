@@ -12,7 +12,7 @@ const createElement = (tag, property, value) => {
 }
 
 // Appends up to three nested elements
-const appendElements = (parent, child, grandchild1, grandchild2) => {
+const threeGenNest = (parent, child, grandchild1, grandchild2) => {
    parent.appendChild(child); 
    child.appendChild(grandchild1);
       if (grandchild2) {
@@ -26,18 +26,15 @@ const itemsPerPage = 10;
 const pageDiv = document.querySelector(".page");
 const div = createElement('div', 'className', 'pagination'); // Creates DIV w/ class of pagination 
                                                              // to hold UL
-const ul = document.createElement('ul');   // An UL to hold pagination links
+const ul = document.createElement('ul');   // A UL to hold pagination links
 
-
-// Creates and Appends Elements to add search bar
+// Adds search bar
 const pageHeaderDiv = document.querySelector('.page-header');
 const searchDiv = createElement('div', 'className', "student-search"); // Creates DIV w/ class of sudent-search
                                                                        // to hold input and button
 const input = createElement('input', 'type', 'text');
 const button = createElement('button', 'textContent', 'Search Students');
-appendElements(pageHeaderDiv, searchDiv, input, button)
-
-
+threeGenNest(pageHeaderDiv, searchDiv, input, button)
 
 // Function to hide/show list of students
 const showPage = (list, page) => {
@@ -52,29 +49,21 @@ const showPage = (list, page) => {
    } 
 }
 
-
-
 // Function to create pagination links and add functionality to them
 const appendPageLinks = (list) => {
    const pagesNeeded = Math.ceil(list.length/itemsPerPage); // Determines number pagination links needed
-   // pageDiv.appendChild(div);
-   // div.appendChild(ul);
-   appendElements(pageDiv, div, ul);
+   threeGenNest(pageDiv, div, ul);
    let i = 1;
    while (i <= pagesNeeded) {
       const li = document.createElement('li');
-      const a = document.createElement('a');
+      const a = createElement('a', 'href', '#');
       a.textContent = i;
-      a.href = '#';
-      ul.appendChild(li);
-      li.appendChild(a);
-      
-
+      threeGenNest(ul, li, a);
 /*       The following is a condition that makes sure pagination link "1" receives appropriate styling
          on initial load since link would not have been clicked yet | Also calls showPage
          function to make sure student list displays */
       if (i === 1)   {
-         a.className = 'active'; // If run only one <a> has been created | .active is added to it
+         a.className = 'active'; // .active is added to pagination link #1
          showPage(listItem, i);
       }
       i++; // Breaks while loop
@@ -93,35 +82,3 @@ const appendPageLinks = (list) => {
 }
 
 appendPageLinks(listItem);
-
-
-
-
-// pageHeaderDiv.appendChild(searchDiv);
-// searchDiv.appendChild(input);
-// searchDiv.appendChild(button);
-
-/* input.addEventListener('keypress', (e) => {
-   for (let i = 0; i < listItem.length; i++) {
-      listItem[i].style.display = "none";
-   }
-
-
-   let key = e.key.toUpperCase();
-   console.log(key);
-   const details = document.querySelectorAll('.student-details h3');
-   for (let i = 0; i < details.length; i++) {
-      if (details[i].textContent.toUpperCase().startsWith(key)) {
-         listItem[i].style.display = "";
-         const searchArray = [];
-         searchArray.push(listItem[i]);
-         if (searchArray.length <= itemsPerPage) {
-            const lisA = document.querySelectorAll('.pagination ul li a');
-            for (let i = 0; i < lisA.length; i++) {
-               lisA[i].style.display = "none";
-            }
-         } else {            appendPageLinks(searchArray);
-         }
-      }
-   }
-}); */
