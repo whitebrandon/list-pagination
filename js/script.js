@@ -87,40 +87,28 @@ appendPageLinks(listItem);
 
 
 input.addEventListener('keyup', (e) => {   
-   /* What if each time the keypress event is triggered, i get the input.value and set it
-   to some variable, then that becomes the starts with string  */
-   const searchString = input.value.toUpperCase();
+   const searchString = input.value.toUpperCase(); // Stores value of search bar after event trigger
+   // ↓ Grabs all of the student's names to compare later
    const studentNames = document.querySelectorAll('.student-details h3');
-   const lisA = document.querySelectorAll('.pagination ul li a'); 
-   const searchList = [];  // May need to assign this elsewhere;
-
-   if (searchString !== "") { // If input for the search bar is not an empty string
-       //START OF 'KEYUP' FOR LOOP #1
-       // that initially hides all students on event trigger     
-      for (let i = 0; i < listItem.length; i++) {
-         listItem[i].style.display = "none";
-      };
-      for (let i = 0; i < lisA.length; i++) { // This is supposed to delete all pagination elements
-         lisA[i].parentNode.parentNode.removeChild(lisA[i].parentNode);
-      }
+   // ↓ Grabs all of the current pagination links to be deleted
+   const pageAnchors = document.querySelectorAll('.pagination ul li a'); 
+   for (let i = 0; i < listItem.length; i++) {    // Hides all students on event trigger
+      listItem[i].style.display = "none";
+   }
+   for (let i = 0; i < pageAnchors.length; i++) { 
+      pageAnchors[i].parentNode.parentNode.removeChild(pageAnchors[i].parentNode);
+   }
+   if (searchString === "") { // If event key is backspace and clears out search bar
+      appendPageLinks(listItem); // Goes back to original DOM as on intial page load 
+      return;    // Breaks out of event Listener function
    };
-       // END OF 'KEYUP' FOR LOOP #1
-       // START OF 'KEYUP' FOR LOOP #2
-   for (let i = 0; i < studentNames.length; i++) {      
+   const searchList = []; // Empty array to hold search list results
+   for (let i = 0; i < studentNames.length; i++) {
       if (studentNames[i].textContent.toUpperCase().includes(searchString)) {         
          listItem[i].style.display = ""; // Shows student if string in search form is found in student's name         
          searchList.push(listItem[i]); // Adds student to searchList array
-      }  
-      /* else { // May need to take this out of the for loop
-           console.log('No student found');
-           const errorDiv = createElement('div', 'className', 'error');
-           const p = createElement('p', 'textContent', 'No student found');
-           p.style.color = "red";
-           p.style.display = "inline";
-           searchDiv.insertBefore(errorDiv, input);
-           errorDiv.appendChild(p);
-      } */
-   }  // END OF 'KEYUP' FOR LOOP #2
+      } 
+   }
    if (searchList.length > itemsPerPage) { // If the search list is < 10 students, removes all pagination links
       appendPageLinks(searchList);
    }
