@@ -91,7 +91,12 @@ input.addEventListener('keyup', (e) => {
    // ↓ Grabs all of the student's names to compare later
    const studentNames = document.querySelectorAll('.student-details h3');
    // ↓ Grabs all of the current pagination links to be deleted
-   const pageAnchors = document.querySelectorAll('.pagination ul li a'); 
+   const pageAnchors = document.querySelectorAll('.pagination ul li a');
+   if (document.querySelector('.page-header').children.length > 2) {
+      const errorDiv = document.querySelector('.error');
+      pageHeaderDiv.removeChild(errorDiv);
+   }
+   const p = createElement('p', 'textContent', 'No match found'); 
    for (let i = 0; i < listItem.length; i++) {    // Hides all students on event trigger
       listItem[i].style.display = "none";
    }
@@ -103,13 +108,19 @@ input.addEventListener('keyup', (e) => {
       return;    // Breaks out of event Listener function
    };
    const searchList = []; // Empty array to hold search list results
+   // console.log(searchList.length)
    for (let i = 0; i < studentNames.length; i++) {
       if (studentNames[i].textContent.toUpperCase().includes(searchString)) {         
          listItem[i].style.display = ""; // Shows student if string in search form is found in student's name         
          searchList.push(listItem[i]); // Adds student to searchList array
       } 
    }
+   // console.log(searchList.length);
    if (searchList.length > itemsPerPage) { // If the search list is < 10 students, removes all pagination links
       appendPageLinks(searchList);
+   } else if (searchList.length < 1) {
+      const errorDiv = createElement('div', 'className', 'error');
+      const p = createElement('p', 'textContent', 'No matches found')
+      threeGenNest(pageHeaderDiv, errorDiv, p);
    }
 });
