@@ -1,6 +1,8 @@
 /******************************************
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
+Name: Brandon White
+Date of Last Modification: 30/07/2019
 ******************************************/
 
 document.addEventListener('DOMContentLoaded', () => {
