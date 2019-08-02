@@ -16,8 +16,8 @@ The objective of this project was to take a long list of items and dynamically g
 ## Explanation of Techniques Used:
 Five Functions Were Primarily Used in the Coding of this Project.
 <!-- The first two of the five are used primarily for refactoring purposes. -->
-1. The createElement function has three parameters, which it uses to create an element and give it a property and value.
-2. The threeGenNest function has up to four parameters, and is used to append elements to one another (up to three generations of nodes).
+1. The **createElement()** function has three parameters, which it uses to create an element and give it a property and value.
+2. The **threeGenNest()** function has up to four parameters, and is used to append elements to one another (up to three generations of nodes).
 
 3. The **showPage()** function has a list parameter and page parameter, which it uses to determine which students/list items to hide or display. It includes a conditional which assures that search results are presented to the user in an order that is primarily alphabetical.
 4. **The appendPageLinks()** function has a list parameter, and uses the length of that list to determine how many pages are needed to hold all the students/list items. It then adds those pagination links to the bottom of the page. It then calls the **showPage()** function and feeds it one of two arguments: the original list, or the list of matches from the user's search. This function also adds an eventListener to the container that holds the pagination links. The call back function of that eventListener adds an active state to the pagination button that holds the list of students/list items that are contained on that page. It also calls the showPage function and feeds it one of two arguments: the original list, or the list of matches from the user's search.
