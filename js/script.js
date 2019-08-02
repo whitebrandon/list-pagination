@@ -5,6 +5,8 @@ Name: Brandon White
 Date of Last Modification: 30/07/2019
 ******************************************/
 
+'use strict';
+
 document.addEventListener('DOMContentLoaded', () => {
    // ↓ Function creates an element and gives it a property and value
    const createElement = (tag, property, value) => {
