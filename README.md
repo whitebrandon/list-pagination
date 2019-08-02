@@ -13,7 +13,7 @@ The objective of this project was to take a long list of items and dynamically g
 * Depending on how many results are found, the correct number of new pagination links will be dynamically added to the page; or in the case where matching results are less than ten students, no pagination links will appear on the page.
 * If no results are found, a message: "No matches found" will be printed on the page in a red text color.
 
-Explanation of Techniques Used:
+## Explanation of Techniques Used:
 Five Functions Were Primarily Used in the Coding of this Project.
 <!-- The first two of the five are used primarily for refactoring purposes. -->
 1. The createElement function has three parameters, which it uses to create an element and give it a property and value.
