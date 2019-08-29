@@ -2,7 +2,7 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 Name: Brandon White
-Date of Last Modification: 30/07/2019
+Date of Last Modification: 28/08/2019
 ******************************************/
 
 'use strict';
@@ -54,19 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
          // ↓ No matter what, all the original students are hidden so that students will
          // display on page in an order that's primarily alphabetical
          for (let i = 0; i < studentList.children.length; i++) {
-            if (i >= startIndex + listDifferential && i < endIndex + listDifferential) {
-               studentList.children[i].style.display = "";
-            } else {
-               studentList.children[i].style.display = "none";
-            }
+            i >= startIndex + listDifferential && i < endIndex + listDifferential ? studentList.children[i].style.display = "" : studentList.children[i].style.display = "none";
          }
       } else {
          for (let i = 0; i < list.length; i++) {
-            if (i >= startIndex && i < endIndex) {
-               list[i].style.display = "";
-            } else {
-               list[i].style.display = "none";
-            }
+            i >= startIndex && i < endIndex ? list[i].style.display = "" : list[i].style.display = "none";
          } 
       }
 
@@ -94,18 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
          /* ↓ Listens for click on DIV and changes pagination styling as 
             well as the list of students that are displayed */
       div.addEventListener('click', (e) => {
-         e.preventDefault;
          const clickedLink = e.target;
          const active = document.querySelectorAll('.active');
             for (let i = 0; i < active.length; i++) {
                active[i].classList.remove('active'); // Remove class name: 'active' for all <a>'s
             }
          clickedLink.className = 'active'; // Adds class name: 'active' back to appropriate pagination link
-         if (input.value.length > 0) {
-            showPage(matchList, clickedLink.textContent);
-         } else {
-            showPage(listItem, clickedLink.textContent);
-         }
+         input.value.length > 0 ? showPage(matchList, clickedLink.textContent) : showPage(listItem, clickedLink.textContent);
       });
    }
 
