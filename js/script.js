@@ -2,7 +2,7 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 Name: Brandon White
-Date of Last Modification: 07/09/2019
+Date of Last Modification: 06/07/2019
 ******************************************/
 
 'use strict';
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ================ GLOBAL VARIABLES ================
       ================================================== */
 
-   const listItem = Array.from(document.getElementsByClassName("student-item")); // ← Grabs list of students from HTML
+   const listItem = Array.from(document.getElementsByClassName("student-item")); // ← Grabs list of students
    const itemsPerPage = 10;
    const pageDiv = document.querySelector(".page"); // ← Wraps page header and unordered student list
    const div = createElement('div', 'className', 'pagination'); // ← Creates div w/ class of pagination 
@@ -50,11 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (list === matchList) {
          // ↓ No matter what, all the original students are hidden so that students will
          // display on page in an order that's primarily alphabetical
-         for (let i = 0; i < studentList.children.length; i++) {
+         for (let i = 0, n = studentList.children.length; i < n; i++) {
             i >= startIndex + listDifferential && i < endIndex + listDifferential ? studentList.children[i].style.display = "" : studentList.children[i].style.display = "none";
          }
       } else {
-         for (let i = 0; i < list.length; i++) {
+         for (let i = 0, n = list.length; i < n; i++) {
             i >= startIndex && i < endIndex ? list[i].style.display = "" : list[i].style.display = "none";
          } 
       }
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
    function getPage (event) {
       const target = event.target;
       const active = document.querySelectorAll('.active');
-         for (let i = 0; i < active.length; i++) {
+         for (let i = 0, n = active.length; i < n; i++) {
             active[i].classList.remove('active'); // Remove class name: 'active' for all <a>'s
          }
       target.className = 'active'; // Adds class name: 'active' back to appropriate pagination link
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    function pageReset () {
       const pageAnchors = document.querySelectorAll('.pagination ul li a'); // ← Grabs all pagination links
-      if (document.querySelector('.error')) document.querySelector('.error').remove(); // ← Removes "no match" msg
+      document.querySelector('.error') && document.querySelector('.error').remove(); // ← Removes "no match" msg
       matchList.forEach(() => studentList.lastElementChild.remove()); // ← Removes cloned students from original list
       matchList = []; // ← List of matches from prev search is cleared out
       listItem.forEach(student => student.style.display = "none") // ← Hides all students
@@ -110,18 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
    }
 
    function findMatches (searchString) {
-      for (let i = 0; i < listItem.length; i++) {
+      for (let i = 0, n = listItem.length; i < n; i++) {
          // ↓ Students whose names start with search string are added to match list
          if (studentNames[i].textContent.toUpperCase().startsWith(searchString)) matchList.push(listItem[i]);
       }
-      for (let i = 0; i < listItem.length; i++) {
+      for (let i = 0, n = listItem.length; i < n; i++) {
          // ↓ Students whose names include search string are added to match list
-         if (studentNames[i].textContent.toUpperCase().includes(searchString)
-            && !studentNames[i].textContent.toUpperCase().startsWith(searchString)) {         
-            matchList.push(listItem[i]);
-         }
+         studentNames[i].textContent.toUpperCase().includes(searchString) && !studentNames[i].textContent.toUpperCase().startsWith(searchString) && matchList.push(listItem[i]);
       }
-      for (let i = 0; i < matchList.length; i++) {
+      for (let i = 0, n = matchList.length; i < n; i++) {
          studentList.appendChild(matchList[i].cloneNode(true));
       }
    }
@@ -129,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
    function printResults () {
       if (matchList.length > itemsPerPage) appendPageLinks(matchList);
       else if (matchList.length <= itemsPerPage && matchList.length > 0) {
-         for (let i = 0; i < matchList.length; i++) {
+         for (let i = 0, n = matchList.length; i < n; i++) {
             studentList.children[i + listDifferential].style.display = "";
          }
       } else createErrorMessage(); // ← If search yields no results, appropriate message is printed to page
