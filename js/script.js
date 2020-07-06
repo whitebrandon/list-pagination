@@ -2,7 +2,7 @@
 Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 Name: Brandon White
-Date of Last Modification: 06/07/2019
+Date of Last Modification: 06/07/2020
 ******************************************/
 
 'use strict';
