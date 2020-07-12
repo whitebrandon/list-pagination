@@ -1,8 +1,4 @@
-# TECH DEGREE PROJECT #2 | LIST PAGINATION && FILTERING
-
-a COURSE BY TREEHOUSE
-
-JS Code by Brandon White | white.brandonsean@gmail.com
+# LIST PAGINATION && FILTERING
 
 ## Objective: 
 The objective of this project was to take a long list of items and dynamically group and paginate the list to provide a better UX for those persons who would have need to search through the list.
